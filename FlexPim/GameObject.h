@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "Utils.h"
+#include "Utilities.h"
 
 class GameObject : public sf::Sprite
 {
@@ -9,11 +9,8 @@ protected:
 	float health;
 	bool isDead;
 	bool isSelected;
-	bool hasGoal;
 
 	sf::Vector2f goal;
-
-	const sf::Texture *texture;
 
 public:
 	GameObject(const sf::Texture& texture, const sf::Vector2f& position);
@@ -23,7 +20,6 @@ public:
 	virtual void Draw(sf::RenderWindow* window);
 	virtual void DoDamage(float damage);
 
-	void Select(bool selected);
-	void MoveTo(const sf::Vector2f& newGoal);
+	virtual void Select(bool selected);
 	inline virtual const  sf::Texture* const SelectedTexture() const { return nullptr; }
 };

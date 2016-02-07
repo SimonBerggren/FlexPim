@@ -143,30 +143,41 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AllStates.cpp" />
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="Building.cpp" />
+    <ClCompile Include="BuildingHUD.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Fortress.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MovableObject.cpp" />
+    <ClCompile Include="PathFinder.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="WorldObjects.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AllStates.h" />
     <ClInclude Include="Assets.h" />
     <ClInclude Include="Building.h" />
+    <ClInclude Include="BuildingHUD.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Fortress.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Hero.h" />
     <ClInclude Include="HUD.h" />
+    <ClInclude Include="MovableObject.h" />
+    <ClInclude Include="PathFinder.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerController.h" />
-    <ClInclude Include="Utils.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="Utilities.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="WorldObjects.h" />
   </ItemGroup>

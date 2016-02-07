@@ -11,4 +11,6 @@ const sf::Texture* const HeadQuartersTexture();
 
 const sf::Texture* const HUDTexture();
 
+const sf::Texture* const BuildingHUDTexture();
+
 const sf::Font* const Font();

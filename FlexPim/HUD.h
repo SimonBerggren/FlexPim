@@ -1,7 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "Assets.h"
-#include "Utils.h"
+#include "Utilities.h"
 
 class HUD : sf::Sprite
 {

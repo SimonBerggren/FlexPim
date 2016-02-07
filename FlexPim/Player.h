@@ -12,19 +12,20 @@ class Player
 	int buildings;
 	int units;
 
+	sf::RenderWindow* window;
 	GameObject* selected;
 	Fortress* fort;
 	Hero* hero;
 	HUD* hud;
 
 public:
-	Player();
+	Player(sf::RenderWindow* window);
 	~Player();
 
 	void Update(float delta);
 	void Draw(sf::RenderWindow* window);
 
-	const Fortress& GetFort() const { return *fort; }
-	const Hero& GetHero() const { return *hero; }
-	const HUD& GetHUD() const { return *hud; }
+	Fortress* GetFort() const { return fort; }
+	Hero* GetHero() const { return hero; }
+	HUD* GetHUD() const { return hud; }
 };

@@ -35,7 +35,14 @@ const sf::Texture* const HUDTexture()
 	return texture;
 }
 
-const sf::Font * const Font()
+const sf::Texture* const BuildingHUDTexture()
+{
+	static sf::Texture* texture = new sf::Texture();
+	texture->loadFromFile("../Assets/Images/BuildingHUD.png");
+	return texture;
+}
+
+const sf::Font* const Font()
 {
 	static sf::Font* font = new sf::Font();
 	font->loadFromFile("../Assets/Fonts/Font.otf");

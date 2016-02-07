@@ -14,5 +14,5 @@ public:
 	static GameObject* FindObject (const sf::Vector2f& position);
 	static GameObject* FindObject(int position);
 
-	inline static const int Count() { return objects.size(); }
+	inline static const size_t Count() { return objects.size(); }
 };

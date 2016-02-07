@@ -25,6 +25,9 @@ HUD::~HUD()
 
 void HUD::Draw(sf::RenderWindow * window)
 {
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
+		return;
+
 	sf::Vector2f offset(-window->getView().getSize().x / 3.0f, window->getView().getSize().y / 4.0f);
 	setPosition(window->getView().getCenter() + offset);
 	window->draw(*this);

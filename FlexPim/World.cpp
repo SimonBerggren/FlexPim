@@ -1,11 +1,11 @@
 #include "World.h"
 
 World::World(sf::RenderWindow* window)
+	: window(window)
 {
 	background.setTexture(*WorldTexture());
-	this->window = window;
-	player = new Player();
 	controller = new PlayerController();
+	player = new Player(window);
 }
 
 World::~World()
@@ -33,15 +33,16 @@ void World::Update(float delta)
 
 				selected->Select(true);
 				player->selected = selected;
+				break;
 			}
-			else if(player->selected)
+			else if (player->selected)
 			{
 				player->selected->Select(false);
 				player->selected = nullptr;
 			}
 		}
-		if (controller->RightClicked() && player->selected)
-			player->selected->MoveTo(window->mapPixelToCoords(sf::Mouse::getPosition(*window)));
+		if (controller->RightClicked() && player->selected && dynamic_cast<MovableObject*>(player->selected))
+			((MovableObject*)player->selected)->SetNewGoal(window->mapPixelToCoords(sf::Mouse::getPosition(*window)));
 	}
 }
 

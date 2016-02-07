@@ -1,7 +1,8 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player()
+Player::Player(sf::RenderWindow* window)
+	: window(window)
 {
 	gold = 500;
 	fort = new Fortress(sf::Vector2f(320, 350));

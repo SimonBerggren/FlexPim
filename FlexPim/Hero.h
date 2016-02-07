@@ -1,8 +1,8 @@
 #pragma once
-#include "GameObject.h"
+#include "MovableObject.h"
 #include "Assets.h"
 
-class Hero : public GameObject
+class Hero : public MovableObject
 {
 public:
 	Hero(const sf::Vector2f& position);

@@ -1,8 +1,6 @@
 #include <iostream>
 #include "World.h"
-#include "Utils.h"
-
-#define WINDOW_TITLE "FlexPim"
+#include "Utilities.h"
 
 sf::RenderWindow *window;
 World *world;
@@ -17,7 +15,7 @@ int cameraMoveSpeed = 10;
 int main()
 {
 	sf::VideoMode desktop = sf::VideoMode().getDesktopMode();
-	window = new sf::RenderWindow(sf::VideoMode(1280, 720), WINDOW_TITLE, sf::Style::None);
+	window = new sf::RenderWindow(sf::VideoMode(1280, 720), "FlexPim", sf::Style::Default);
 	sf::View view(sf::Vector2f(windowWidth, windowHeight), sf::Vector2f(windowWidth, windowHeight));
 
 	sf::Clock clock;
@@ -84,5 +82,5 @@ int main()
 	delete window;
 	window = nullptr;
 
-	return 0;
+	return EXIT_SUCCESS;
 }
