@@ -1,4 +1,5 @@
 #pragma once
+#include "SFML/Graphics.hpp"
 #include "GameObject.h"
 
 static class WorldObjects
@@ -14,5 +15,6 @@ public:
 	static GameObject* FindObject (const sf::Vector2f& position);
 	static GameObject* FindObject(int position);
 
+	static bool InterSects(const sf::Shape&);
 	inline static const size_t Count() { return objects.size(); }
 };

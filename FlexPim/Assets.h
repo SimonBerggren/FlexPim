@@ -13,4 +13,6 @@ const sf::Texture* const HUDTexture();
 
 const sf::Texture* const BuildingHUDTexture();
 
+const sf::Texture* const GoatTexture();
+
 const sf::Font* const Font();

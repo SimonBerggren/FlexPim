@@ -33,39 +33,67 @@ void PathFinder::FindPath(const sf::Vector2f & currPos, const sf::Vector2f & tar
 		pathToGoal.clear();
 
 		SearchCell start;
-		start.x = currPos.x;
-		start.y = currPos.y;
+		start.x = currPos.x / 20;
+		start.y = currPos.y / 20;
 
 		SearchCell goal;
-		goal.x = targetPos.x;
-		goal.y = targetPos.y;
+		goal.x = targetPos.x / 20;
+		goal.y = targetPos.y / 20;
 
 		SetStartAndGoal(start, goal);
 		initializedStartGoal = true;
 	}
 	if (initializedStartGoal)
 		ContinuePath();
+
+	for (int i = 0; i < pathToGoal.size(); ++i)
+		std::cout << i << ": " << pathToGoal[i]->x << ", " << pathToGoal[i]->y << std::endl;
+
+	for (int i = 0; i < openList.size(); ++i)
+		std::cout << i << ": " << openList[i]->x << ", " << openList[i]->y << std::endl;
 }
 
-sf::Vector2f PathFinder::NextPathPos(MovableObject* obj)
+sf::Vector2f PathFinder::NextPathPos(GameObject* obj)
 {
 	int index = 1;
 
 	sf::Vector2f nextPos;
 	nextPos.x = pathToGoal[pathToGoal.size() - index]->x;
 	nextPos.y = pathToGoal[pathToGoal.size() - index]->y;
-
 	sf::Vector2f distance = nextPos - obj->getPosition();
 
 	if (index < pathToGoal.size())
 	{
-		if (VectorLength(distance) < obj->getGlobalBounds().width * 0.25f)
+		if (VectorLength(distance) < obj->getGlobalBounds().width / 2)
 		{
 			pathToGoal.erase(pathToGoal.end() - index);
 		}
 	}
-
 	return nextPos;
+}
+
+void PathFinder::Clear()
+{
+	for (int i = 0; i < openList.size(); ++i)
+	{
+		delete openList[i];
+	}
+	openList.clear();
+
+	for (int i = 0; i < visitedList.size(); ++i)
+	{
+		delete visitedList[i];
+	}
+	visitedList.clear();
+
+	for (int i = 0; i < pathToGoal.size(); ++i)
+	{
+		delete pathToGoal[i];
+	}
+	pathToGoal.clear();
+
+	initializedStartGoal = false;
+	foundGoal = false;
 }
 
 void PathFinder::SetStartAndGoal(SearchCell start, SearchCell goal)
@@ -73,10 +101,10 @@ void PathFinder::SetStartAndGoal(SearchCell start, SearchCell goal)
 	startCell = new SearchCell(start.x, start.y, NULL);
 	goalCell = new SearchCell(goal.x, goal.y, &goal);
 
-	startCell->G = 0;
 	startCell->H = startCell->ManHattanDistance(goalCell);
 
 	openList.push_back(startCell);
+	std::cout << "start added: " << start.x << ", " << start.y << std::endl;
 }
 
 void PathFinder::PathOpened(int x, int y, float newCost, SearchCell * parent)
@@ -111,7 +139,6 @@ void PathFinder::PathOpened(int x, int y, float newCost, SearchCell * parent)
 			}
 		}
 	}
-
 	openList.push_back(newChild);
 }
 
@@ -124,7 +151,11 @@ SearchCell * PathFinder::GetNextCell()
 	for (int i = 0; i < openList.size(); ++i)
 	{
 		if (openList[i]->GetF() < bestF)
+		{
+			std::cout << "new bestf = " << bestF << std::endl;
+			bestF = openList[i]->GetF();
 			cellIndex = i;
+		}
 	}
 
 	if (cellIndex >= 0)
@@ -133,56 +164,58 @@ SearchCell * PathFinder::GetNextCell()
 		visitedList.push_back(nextCell);
 		openList.erase(openList.begin() + cellIndex);
 	}
-
 	return nextCell;
 }
 
 void PathFinder::ContinuePath()
 {
-	if (openList.empty())
+	for (int i = 0; i < 40; ++i)
 	{
-		return;
-	}
+		if (openList.empty())
+			return;
 
-	SearchCell* currentCell = GetNextCell();
-	if (currentCell->id == goalCell->id)
-	{
-		goalCell->parent = currentCell->parent;
+		int tilesize = 20;
 
-		SearchCell* getPath; 
-
-		for (getPath = goalCell; getPath != NULL; getPath = getPath->parent)
+		SearchCell* currentCell = GetNextCell();
+		if (currentCell->id == goalCell->id)
 		{
-			pathToGoal.push_back(new sf::Vector2f(getPath->x, getPath->y));
-		}
+			goalCell->parent = currentCell->parent;
 
-		foundGoal = true;
-		return;
-	}
-	else
-	{
-		// right cell
-		PathOpened(currentCell->x + 1, currentCell->y, currentCell->G + 1, currentCell);
-		// left cell 
-		PathOpened(currentCell->x - 1, currentCell->y, currentCell->G + 1, currentCell);
-		// up
-		PathOpened(currentCell->x, currentCell->y + 1, currentCell->G + 1, currentCell);
-		// down
-		PathOpened(currentCell->x, currentCell->y - 1, currentCell->G + 1, currentCell);
-		// left up
-		PathOpened(currentCell->x + 1, currentCell->y + 1, currentCell->G + 1, currentCell);
-		// left down
-		PathOpened(currentCell->x + 1, currentCell->y - 1, currentCell->G + 1, currentCell);
-		// right up
-		PathOpened(currentCell->x - 1, currentCell->y + 1, currentCell->G + 1, currentCell);
-		// right down
-		PathOpened(currentCell->x - 1, currentCell->y - 1, currentCell->G + 1, currentCell);
+			SearchCell* getPath;
 
-		for (int i = 0; i < openList.size(); ++i)
-		{
-			if (currentCell->id == openList[i]->id)
+			for (getPath = goalCell; getPath != NULL; getPath = getPath->parent)
 			{
-				openList.erase(openList.begin() + i);
+				pathToGoal.push_back(new sf::Vector2f(getPath->x * tilesize, getPath->y * tilesize));
+				std::cout << "cell added" << std::endl;
+			}
+
+			foundGoal = true;
+		}
+		else
+		{
+			// right cell
+			PathOpened(currentCell->x + 1, currentCell->y, currentCell->G + 1, currentCell);
+			// left cell 
+			PathOpened(currentCell->x - 1, currentCell->y, currentCell->G + 1, currentCell);
+			// up
+			PathOpened(currentCell->x, currentCell->y + 1, currentCell->G + 1, currentCell);
+			// down
+			PathOpened(currentCell->x, currentCell->y - 1, currentCell->G + 1, currentCell);
+			// left up
+			PathOpened(currentCell->x + 1, currentCell->y + 1, currentCell->G + 1.414f, currentCell);
+			// left down
+			PathOpened(currentCell->x + 1, currentCell->y - 1, currentCell->G + 1.414f, currentCell);
+			// right up
+			PathOpened(currentCell->x - 1, currentCell->y + 1, currentCell->G + 1.414f, currentCell);
+			// right down
+			PathOpened(currentCell->x - 1, currentCell->y - 1, currentCell->G + 1.414f, currentCell);
+
+			for (int i = 0; i < openList.size(); ++i)
+			{
+				if (currentCell->id == openList[i]->id)
+				{
+					openList.erase(openList.begin() + i);
+				}
 			}
 		}
 	}

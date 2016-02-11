@@ -1,14 +1,17 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 
-
 enum TileType
 {
-	
+	Walkable,
+	NonWalkable,
 };
 
-template<enum TileType>
-struct Tile
+template<TileType T = TileType::Walkable>
+struct Tile : public sf::RectangleShape
 {
-	sf::Vector2f 
+	Tile() : type(T) { }
+	Tile(const sf::Vector2f& position) : m_position(position), type(T) { }
+	void SetType(TileType type) { this->type = type; }
+	TileType type;
 };

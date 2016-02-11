@@ -1,15 +1,15 @@
 #pragma once
 #include <math.h>
 #include "SFML/Graphics.hpp"
-#include "MovableObject.h"
+#include "GameObject.h"
 #include "Utilities.h"
 
-#define WORLD_SIZE 64
+#define WORLD_SIZE 2160
 
 struct SearchCell
 {
 	int x, y;
-	int id;
+	unsigned long id;
 	SearchCell* parent;
 	float G;
 	float H;
@@ -34,12 +34,15 @@ public:
 	~PathFinder();
 
 	void FindPath(const sf::Vector2f& currPos, const sf::Vector2f& targetPos);
-	sf::Vector2f NextPathPos(MovableObject* obj);
+	sf::Vector2f NextPathPos(GameObject* obj);
 
+	std::vector<sf::Vector2f*> pathToGoal;
+
+	void Clear();
+private:
 	bool initializedStartGoal;
 	bool foundGoal;
 
-private:
 	void SetStartAndGoal(SearchCell start, SearchCell goal);
 	void PathOpened(int x, int y, float newCost, SearchCell* parent);
 	SearchCell* GetNextCell();
@@ -49,5 +52,4 @@ private:
 	SearchCell* goalCell;
 	std::vector<SearchCell*> openList;
 	std::vector<SearchCell*> visitedList;
-	std::vector<sf::Vector2f*> pathToGoal;
 };

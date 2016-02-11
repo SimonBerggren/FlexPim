@@ -1,0 +1,12 @@
+﻿  GlobalStates.cpp
+d:\git\flexpim\flexpim\Utilities.h(121): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+d:\git\flexpim\flexpim\Utilities.h(128): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+d:\git\flexpim\flexpim\StateMachine.h(56): warning C4800: 'Idle *': forcing value to bool 'true' or 'false' (performance warning)
+  GlobalStates.cpp(16): note: see reference to function template instantiation 'bool StateMachine<MovableObject>::IsInState<Idle>(void)' being compiled
+  GlobalStates.cpp(16): note: see reference to function template instantiation 'bool StateMachine<MovableObject>::IsInState<Idle>(void)' being compiled
+  Generating code
+  0 of 378 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    4 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  FlexPim.vcxproj -> D:\Git\FlexPim\x64\Release\FlexPim.exe

@@ -49,13 +49,19 @@
     <Filter Include="Header Files\World\Tiles">
       <UniqueIdentifier>{bf93ffcd-6e2d-4a0f-80cd-47a2501fa9ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\World">
+      <UniqueIdentifier>{75134b19-a4d4-40e8-835e-3a4d256ce3a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities\Animals">
+      <UniqueIdentifier>{ec41e417-51d4-4497-8a7a-31a7a62b3eb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Animals">
+      <UniqueIdentifier>{ee5a4f36-29a9-46aa-804b-11c993aa39d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AllStates.cpp">
-      <Filter>Source Files\FSM</Filter>
     </ClCompile>
     <ClCompile Include="Assets.cpp">
       <Filter>Source Files\Global</Filter>
@@ -93,17 +99,29 @@
     <ClCompile Include="PlayerController.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="World.cpp">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="WorldObjects.cpp">
       <Filter>Source Files\Global</Filter>
     </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityStates.cpp">
+      <Filter>Source Files\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingStates.cpp">
+      <Filter>Source Files\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalStates.cpp">
+      <Filter>Source Files\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="Animal.cpp">
+      <Filter>Source Files\Entities\Animals</Filter>
+    </ClCompile>
+    <ClCompile Include="Goat.cpp">
+      <Filter>Source Files\Entities\Animals</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AllStates.h">
-      <Filter>Header Files\FSM</Filter>
-    </ClInclude>
     <ClInclude Include="Assets.h">
       <Filter>Header Files\Global</Filter>
     </ClInclude>
@@ -137,9 +155,6 @@
     <ClInclude Include="PathFinder.h">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="World.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
@@ -157,6 +172,24 @@
     </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>Header Files\World\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityStates.h">
+      <Filter>Header Files\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingStates.h">
+      <Filter>Header Files\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Goat.h">
+      <Filter>Header Files\Entities\Animals</Filter>
+    </ClInclude>
+    <ClInclude Include="Animal.h">
+      <Filter>Header Files\Entities\Animals</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalStates.h">
+      <Filter>Header Files\FSM</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

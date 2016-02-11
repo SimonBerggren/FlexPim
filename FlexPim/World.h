@@ -4,8 +4,11 @@
 #include "MovableObject.h"
 #include "WorldObjects.h"
 #include "GameObject.h"
+#include "EntityStates.h"
 #include "Assets.h"
 #include "Player.h"
+#include "Tile.h"
+#include "Goat.h"
 
 class World
 {
@@ -14,6 +17,9 @@ class World
 	PlayerController* controller;
 	Player* player;
 	std::vector<GameObject*> gameObjects;
+	Tile<>* tiles;
+	int tileCount;
+	int tileSize;
 public:
 	World(sf::RenderWindow* window);
 	~World();
@@ -22,4 +28,6 @@ public:
 
 	int GetWidth() { return background.getTexture()->getSize().x; }
 	int GetHeight() { return background.getTexture()->getSize().y; }
+
+	Goat* goat;
 };

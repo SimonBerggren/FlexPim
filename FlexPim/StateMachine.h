@@ -15,22 +15,34 @@ public:
 	virtual ~StateMachine() {}
 	void Update()
 	{
-		if (currState)
-			currState->Execute(owner);
-
 		if (globalState)
 			globalState->Execute(owner);
+
+		if (currState)
+			currState->Execute(owner);
 	}
 
 	void ChangeState(State<T>* newState)
 	{
-		prevState = currState;
+		if (prevState)
+			prevState = currState;
 
-		currState->Exit(owner);
+		if (currState)
+			currState->Exit(owner);
 
 		currState = newState;
 
-		currState->Enter();
+		currState->Enter(owner);
+	}
+
+	void ChangeGlobalState(State<T>* newState)
+	{
+		if (globalState)
+			globalState->Exit(owner);
+
+		globalState = newState;
+
+		globalState->Enter(owner);
 	}
 
 	void GoToPrevState()
@@ -38,9 +50,16 @@ public:
 		ChangeState(prevState);
 	}
 
-	bool IsInState(class State)
+	template <class T>
+	bool IsInState()
 	{
-		return dynamic_cast<State*>(currState);
+		return dynamic_cast<T*>(currState);
+	}
+
+	template <class T>
+	bool IsInGlobalState()
+	{
+		return dynamic_cast<T*>(globalState);
 	}
 
 	State<T>* CurrentState() const { return currState; }

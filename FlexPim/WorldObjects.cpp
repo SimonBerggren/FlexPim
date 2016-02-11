@@ -49,3 +49,13 @@ GameObject* WorldObjects::FindObject(int position)
 	else
 		return nullptr;
 }
+
+bool WorldObjects::InterSects(const sf::Shape & shape)
+{
+	for (int i = 0; i < Count(); ++i)
+	{
+		if (shape.getGlobalBounds().intersects(objects[i]->getGlobalBounds()))
+			return true;
+	}
+	return false;
+}

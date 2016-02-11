@@ -9,5 +9,5 @@ public:
 	~Hero();
 
 	virtual void Update(float delta) override;
-	inline virtual const sf::Texture* const SelectedTexture() const override { return SelectedPlayerTexture(); }
+	//inline virtual const sf::Texture* const SelectedTexture() const override { return SelectedPlayerTexture(); }
 };

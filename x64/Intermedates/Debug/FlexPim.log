@@ -1,0 +1,5 @@
+﻿  World.cpp
+d:\git\flexpim\flexpim\worldobjects.h(20): warning C4091: 'static ': ignored on left of 'WorldObjects' when no variable is declared
+d:\git\flexpim\flexpim\world.cpp(21): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\git\flexpim\flexpim\world.cpp(22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  FlexPim.vcxproj -> D:\Git\FlexPim\x64\Debug\FlexPim.exe

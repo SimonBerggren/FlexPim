@@ -42,6 +42,13 @@ const sf::Texture* const BuildingHUDTexture()
 	return texture;
 }
 
+const sf::Texture * const GoatTexture()
+{
+	static sf::Texture* texture = new sf::Texture();
+	texture->loadFromFile("../Assets/Images/Goat.png");
+	return texture;
+}
+
 const sf::Font* const Font()
 {
 	static sf::Font* font = new sf::Font();
