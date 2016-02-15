@@ -17,11 +17,12 @@ int main()
 	sf::VideoMode desktop = sf::VideoMode().getDesktopMode();
 	window = new sf::RenderWindow(sf::VideoMode(1280, 720), "FlexPim", sf::Style::Default);
 	sf::View view(sf::Vector2f(windowWidth, windowHeight), sf::Vector2f(windowWidth, windowHeight));
+	window->setView(view);
 
 	sf::Clock clock;
-	float lastUpdate = 0.0f;
-	float updateFrequency = (1.0f / 60.0f);
-	float delta;
+	sf::Time deltaTime = sf::Time::Zero;
+	sf::Time ups = sf::seconds(1.0f / 60.0f); // updates per second
+	float delta = 0.0f;
 
 	world = new World(window);
 
@@ -41,11 +42,11 @@ int main()
 			}
 		}
 
-		delta = clock.restart().asSeconds();
-		lastUpdate += delta;
-		while (lastUpdate > updateFrequency)
+		while (deltaTime > ups)
 		{
-			lastUpdate -= updateFrequency;
+			deltaTime -= ups;
+			delta = deltaTime.asSeconds();
+			 
 			// update
 			world->Update(delta);
 
@@ -77,6 +78,7 @@ int main()
 		world->Draw();
 
 		window->display();
+		deltaTime += clock.restart();
 	}
 
 	delete window;

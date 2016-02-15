@@ -1,17 +1,12 @@
 #include "Goat.h"
 
 Goat::Goat(const sf::Texture & texture, const sf::Vector2f & position)
-	: MovableObject(texture, position)
+	: Animal(texture, position)
 {
 
 }
 
 Goat::~Goat()
-{
-
-}
-
-void Goat::Update(float delta)
 {
 
 }

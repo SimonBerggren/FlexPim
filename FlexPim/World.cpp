@@ -26,7 +26,7 @@ World::World(sf::RenderWindow* window)
 			tiles[x + tilesX * y].setOutlineColor(sf::Color::Green);
 			tiles[x + tilesX * y].setOutlineThickness(2.0f);
 
-			if (WorldObjects::InterSects(tiles[x + tilesX * y]))
+			if (WorldObjects::Intersects(tiles[x + tilesX * y]))
 				tiles[x + tilesX * y].SetType(TileType::NonWalkable);
 		}
 	}
@@ -66,8 +66,11 @@ void World::Update(float delta)
 				player->selected = nullptr;
 			}
 		}
+
 		if (controller->RightClicked() && player->selected && dynamic_cast<MovableObject*>(player->selected))
-				((MovableObject*)player->selected)->SetGoal(window->mapPixelToCoords(sf::Mouse::getPosition(*window)));
+		{
+			((MovableObject*)player->selected)->SetGoal(window->mapPixelToCoords(sf::Mouse::getPosition(*window)));
+		}
 	}
 }
 
@@ -79,6 +82,7 @@ void World::Draw()
 	{
 		(*obj)->Draw(window);
 	}
+
 	//for (int i = 0; i < tileCount; i++)
 	//	window->draw(tiles[i]);
 

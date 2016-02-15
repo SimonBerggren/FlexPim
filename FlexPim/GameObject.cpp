@@ -8,6 +8,7 @@ GameObject::GameObject(const sf::Texture& texture, const sf::Vector2f& position)
 	setOrigin(sf::Vector2f(this->getTextureRect().width / 2, this->getTextureRect().height / 2));
 	isDead = false;
 	isSelected = false;
+	health = 100.0f;
 }
 
 GameObject::~GameObject()
@@ -45,6 +46,8 @@ void GameObject::DoDamage(float damage)
 
 	if (health == 0.0f)
 		isDead = true;
+
+	std::cout << "Health: " << health << std::endl;
 }
 
 void GameObject::Select(bool selected)

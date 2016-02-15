@@ -64,7 +64,16 @@ void AttackingTarget::Enter(MovableObject * owner)
 
 void AttackingTarget::Execute(MovableObject * owner)
 {
-
+	if (!owner->IsOnCooldown())
+	{
+		owner->GetAggroObj()->DoDamage(2.0f);
+		if (owner->GetAggroObj()->IsDead())
+		{
+			WorldObjects::RemoveObject(owner->GetAggroObj());
+			delete owner->GetAggroObj();
+			owner->aggroObj = nullptr;
+		}
+	}
 }
 
 void AttackingTarget::Exit(MovableObject * owner)

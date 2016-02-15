@@ -1,10 +1,9 @@
 #pragma once
-#include "MovableObject.h"
+#include "Animal.h"
 
-class Goat : public MovableObject
+class Goat : public Animal
 {
 public:
 	Goat(const sf::Texture& texture, const sf::Vector2f& position);
 	virtual ~Goat();
-	virtual void Update(float delta) override;
 };

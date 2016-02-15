@@ -6,13 +6,17 @@ MovableObject::MovableObject(const sf::Texture& texture, const sf::Vector2f& pos
 {
 	hasGoal = false;
 	isMoving = false;
+	aggroObj = nullptr;
 	fsm = new StateMachine<MovableObject>(this);
 	timeStandingStill = 0.0f;
 	maxTimeStandingStill = 5.0f;
+	fsm->ChangeState(Idle::Instance());
+	aggroRange = 500.0f;
 }
 
 MovableObject::~MovableObject()
 {
+
 
 }
 
@@ -24,17 +28,20 @@ void MovableObject::Update(float delta)
 	{
 		if (hasGoal && VectorDistance(getPosition(), goal) > 2.0f)
 		{
-			move(DirectionBetween(getPosition(), goal) * delta * 10.0f);
+			sf::Vector2f direction = VectorBetween(getPosition(), goal);
+			sf::Vector2f normDir = NormalizeVector<float>(direction);
+			setRotation(DegreesOfVector(direction));
+			move(normDir * 2.0f);
 		}
 		else
 		{
 			hasGoal = false;
 			fsm->ChangeState(Idle::Instance());
+			standingStill.restart();
+
+			if (aggroObj)
+				aggroObj = nullptr;
 		}
-	}
-	else
-	{
-		timeStandingStill += delta;
 	}
 }
 
@@ -58,6 +65,10 @@ sf::Vector2f MovableObject::GetClosePosition(float radius)
 	sf::Vector2f position;
 	position.x = RandomFloat(-radius, radius);
 	position.y = RandomFloat(-radius, radius);
+
 	position += getPosition();
+
+	position.x = Clamp(position.x, 0.0f, 1920.0f);
+	position.y = Clamp(position.y, 0.0f, 1080.0f);
 	return position;
 }

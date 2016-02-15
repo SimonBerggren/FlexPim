@@ -19,5 +19,7 @@ public:
 	virtual void Draw(sf::RenderWindow* window);
 	void DoDamage(float damage);
 
+	bool IsDead() const { return isDead; }
 	virtual void Select(bool selected);
+	float Diagonal() const { return std::sqrt((getGlobalBounds().width * getGlobalBounds().width) + (getGlobalBounds().height + getGlobalBounds().height)); }
 };

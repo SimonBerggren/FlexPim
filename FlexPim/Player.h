@@ -20,7 +20,7 @@ class Player
 
 public:
 	Player(sf::RenderWindow* window);
-	~Player();
+	virtual ~Player();
 
 	void Update(float delta);
 	void Draw(sf::RenderWindow* window);

@@ -26,7 +26,7 @@ void WorldObjects::RemoveObjectAt(int position)
 GameObject* WorldObjects::FindObject(GameObject * object)
 {
 	std::vector<GameObject*>::iterator returnObj = std::find(objects.begin(), objects.end(), object);
-	
+
 	if (returnObj != objects.end())
 		return *returnObj;
 	else
@@ -42,6 +42,22 @@ GameObject* WorldObjects::FindObject(const sf::Vector2f & position)
 	return nullptr;
 }
 
+GameObject * WorldObjects::FindObject(const sf::Vector2f & position, float range)
+{
+	for (int i = 0; i < Count(); ++i)
+	{
+		if (objects[i]->getPosition().x >(position.x - range) &&
+			objects[i]->getPosition().x < (position.x + range) &&
+			objects[i]->getPosition().y >(position.y - range) &&
+			objects[i]->getPosition().y < (position.y + range))
+		{
+			return objects[i];
+		}
+	}
+
+	return nullptr;
+}
+
 GameObject* WorldObjects::FindObject(int position)
 {
 	if (position >= 0 && position < Count())
@@ -50,11 +66,21 @@ GameObject* WorldObjects::FindObject(int position)
 		return nullptr;
 }
 
-bool WorldObjects::InterSects(const sf::Shape & shape)
+bool WorldObjects::Intersects(const sf::Shape& shape)
 {
 	for (int i = 0; i < Count(); ++i)
 	{
 		if (shape.getGlobalBounds().intersects(objects[i]->getGlobalBounds()))
+			return true;
+	}
+	return false;
+}
+
+bool WorldObjects::Intersects(const sf::FloatRect & bounds)
+{
+	for (int i = 0; i < Count(); ++i)
+	{
+		if (bounds.intersects(objects[i]->getGlobalBounds()))
 			return true;
 	}
 	return false;

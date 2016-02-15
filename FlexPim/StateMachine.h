@@ -13,6 +13,7 @@ public:
 
 	StateMachine(T* owner) : owner(owner), currState(nullptr), prevState(nullptr), globalState(nullptr) { }
 	virtual ~StateMachine() {}
+
 	void Update()
 	{
 		if (globalState)
